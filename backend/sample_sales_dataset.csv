@@ -1,0 +1,11 @@
+Order ID,Amount,Profit,Quantity,Category,Sub-Category,PaymentMode,Order Date,CustomerName,State,City,Year-Month
+B-10001,1200,220,3,Electronics,Phones,UPI,2025-01-05,Alice Carter,Texas,Dallas,2025-01
+B-10002,850,120,5,Office Supplies,Pens,Debit Card,2025-01-08,Noah Hill,Florida,Miami,2025-01
+B-10003,4200,980,2,Furniture,Sofas,Credit Card,2025-01-11,Eva Brown,California,San Diego,2025-01
+B-10004,2300,430,4,Electronics,Laptops,EMI,2025-02-03,Liam Scott,Illinois,Chicago,2025-02
+B-10005,670,95,6,Office Supplies,Paper,COD,2025-02-09,Emma Reed,Texas,Austin,2025-02
+B-10006,1800,300,3,Furniture,Tables,UPI,2025-02-15,Jacob Ward,New York,Rochester,2025-02
+B-10007,950,140,7,Office Supplies,Binders,Credit Card,2025-03-02,Mia Hayes,California,San Francisco,2025-03
+B-10008,5100,1260,2,Electronics,Electronic Games,UPI,2025-03-07,Ethan Lee,Florida,Orlando,2025-03
+B-10009,1400,260,4,Furniture,Chairs,Debit Card,2025-03-13,Olivia Clark,Ohio,Columbus,2025-03
+B-10010,3200,700,3,Electronics,Printers,Credit Card,2025-03-20,Lucas Young,New York,Buffalo,2025-03
