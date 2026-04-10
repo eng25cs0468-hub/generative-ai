@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AuthForm from "./components/AuthForm";
 import "./App.css";
 import Sidebar from "./components/Sidebar";
 import Navbar from "./components/Navbar";
@@ -8,10 +9,12 @@ import Insights from "./pages/Insights";
 import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 
+
 function App() {
   const [activePage, setActivePage] = useState("dashboard");
   const [effectsEnabled, setEffectsEnabled] = useState(true);
   const [theme, setTheme] = useState("dark");
+  const [token, setToken] = useState(null);
 
   const renderPage = () => {
     switch (activePage) {
@@ -37,6 +40,9 @@ function App() {
     }
   };
 
+  if (!token) {
+    return <AuthForm onAuth={setToken} />;
+  }
   return (
     <div className={`app-container theme-${theme}`}>
       <Sidebar activePage={activePage} setActivePage={setActivePage} />

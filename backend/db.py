@@ -6,6 +6,7 @@ try:
     db = client[DB_NAME]
     queries_collection = db["queries"]
     sales_collection = db["sales_data"]
+    users_collection = db["users"]
 
     # Test connection
     client.admin.command('ping')

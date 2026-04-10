@@ -8,21 +8,41 @@ import re
 from fastapi import FastAPI
 from fastapi import File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from backend.auth import router as auth_router
+from backend.email_reports import scheduler
+from backend.realtime import router as realtime_router
 from pydantic import BaseModel
 
 from backend.db import queries_collection, sales_collection
 from backend.model.agent_planner import plan_chart_with_langchain_agent
 from backend.model.predict import predict_chart
 
+
+
 app = FastAPI()
 
+# CORS middleware must be added before routers
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=[
+        "http://localhost",
+        "http://127.0.0.1",
+        *[f"http://localhost:{port}" for port in range(3000, 3010)],
+        *[f"http://127.0.0.1:{port}" for port in range(3000, 3010)],
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
+app.include_router(realtime_router)
+
+# Start the email scheduler (it will do nothing until jobs are added)
+try:
+    scheduler.start()
+except Exception:
+    pass
 
 
 class ChartQueryRequest(BaseModel):

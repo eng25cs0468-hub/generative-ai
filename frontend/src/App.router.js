@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -7,15 +8,38 @@ import History from './pages/History';
 import Insights from './pages/Insights';
 import Analytics from './pages/Analytics';
 import Settings from './pages/Settings';
+import AuthForm from './components/AuthForm';
+
+import Snow from './components/Snow';
 import './App.css';
+
 
 function AppRouter() {
 	const [effectsEnabled, setEffectsEnabled] = React.useState(true);
 	const [theme, setTheme] = React.useState('dark');
+	const [token, setToken] = React.useState(null);
+	const [username, setUsername] = React.useState("");
+
+	// Custom onAuth to set token and username
+	const handleAuth = (accessToken, user) => {
+		setToken(accessToken);
+		setUsername(user);
+	};
+
+	if (!token) {
+		return (
+			<div className={`app-container theme-${theme}`}>
+				<div className="app-main">
+					<AuthForm onAuth={handleAuth} />
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<Router>
 			<div className={`app-container theme-${theme}`}>
+				<Snow />
 				<Sidebar />
 				<div className="app-main">
 					<Navbar
@@ -23,6 +47,9 @@ function AppRouter() {
 						effectsEnabled={effectsEnabled}
 						setEffectsEnabled={setEffectsEnabled}
 					/>
+					<div style={{margin: '24px 0 0 0', fontSize: '1.3rem', fontWeight: 600, color: '#60a5fa', textAlign: 'center'}}>
+						{username && `Welcome, ${username}!`}
+					</div>
 					<Routes>
 						<Route path="/" element={<Navigate to="/dashboard" replace />} />
 						<Route path="/dashboard" element={<Dashboard effectsEnabled={effectsEnabled} />} />
